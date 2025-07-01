@@ -1,43 +1,114 @@
 body {
-  margin: 0;
-  padding: 0;
-  background-color: rgb(34, 40, 49);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: rgb(148, 137, 121);
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0;
   height: 100vh;
+  background-color: hsl(0,0%,10%);
 }
+.maindiv {
+  width: 600px;
+  height: 300px;
+  background-color: hsl(0,0%,15%) ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  flex-direction: column;
+  border-radius: 20px;
 
-.container {
-  text-align: center;
-  background-color: rgb(57, 62, 70);
-  padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
-
-h1 {
-  margin-bottom: 20px;
-  font-size: 2.5em;
+.div-one {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  width: 220px;
+  height: 45px;
+  background-color: ;
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
 }
-
-p {
-  font-size: 1.2em;
-  margin-bottom: 30px;
+.div-two {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  width: 380px;
+  height: 30px;
+  background-color: ;
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
-
-.cta-button {
-  text-decoration: none;
-  background-color: rgb(148, 137, 121);
-  color: rgb(34, 40, 49);
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+.div-three{
+  width: 350px;
+  height: 30px;
+  background-color: ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  gap: 40px;
+  margin-top: 30px;
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
 }
-
-.cta-button:hover {
-  background-color: rgb(170, 158, 140);
+.register_button {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  background-color: hsl(0,0%,30%);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+.register_button:hover {
+  background-color: #393E46; /* slight lighter on hover */
+}
+.register_button:hover {
+  background-color: #393E46;
+  color: white;
+}
+.log_in_button {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  background-color: hsl(0,0%,30%) ;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+.log_in_button:hover {
+  background-color: #393E46; /* slight lighter on hover */
+}
+.log_in_button:hover {
+  background-color: #393E46;
+  color: white;
+}
+.log_in_button:hover {
+  background-color: #DDD;
+}
+.chatsphere {
+  color: hsl(0, 0%, 95%);
+}
+.explanation {
+  color: hsl(0, 0%, 70%);
 }
