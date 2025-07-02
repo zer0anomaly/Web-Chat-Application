@@ -2,7 +2,9 @@ body {
 	height: 100vh;
 	margin: 0;
 	display: flex;
+	background-color: hsl(0, 0%, 15%);
 }
+
 .div-one {
 	display: flex;
 	justify-content: flex-start;
@@ -11,35 +13,47 @@ body {
 	height: 100vh;
 	width: 25%;
 	padding-top: 20px;
-	background-color: hsl(0,0%,10%);
-	overflow-y: auto;
+	background-color: hsl(0, 0%, 10%);
 	border-radius: 20px;
 }
+
 .div-two {
 	display: flex;
-	justify-content: flex-start;
-	align-items: center;
 	flex-direction: column;
+	justify-content: space-between;
 	height: 100vh;
 	width: 75%;
-	background-color: hsl(0,0%,15%);
-	overflow-y: auto;
-	padding-top: 20px;
+	background-color: hsl(0, 0%, 15%);
+	padding: 20px;
 	border-radius: 10px;
+	position: relative;
+	box-sizing: border-box;
 }
+
 .usersdiv {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 250px;
 	height: 50px;
-	background-color: hsl(0, 0%,15%);
+	background-color: hsl(0, 0%, 15%);
+	color: white;
 	border-radius: 10px;
 	font-family: "Playfair Display", serif;
- 	font-optical-sizing: auto;
-  	font-weight: 700;
-  	font-style: normal;
-  	position: fixed;
+	font-optical-sizing: auto;
+	font-weight: 700;
+	font-style: normal;
+	position: fixed;
+}
+
+.infodiv {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 10px;
+	height: 50px;
+	width: 100%;
+	margin-bottom: 20px;
 }
 
 .chatdiv {
@@ -48,82 +62,80 @@ body {
 	align-items: center;
 	width: 250px;
 	height: 50px;
-	background-color: hsl(0, 0%,10%);
+	background-color: hsl(0, 0%, 10%);
+	color: white;
 	border-radius: 10px;
 	font-family: "Playfair Display", serif;
- 	font-optical-sizing: auto;
-  	font-weight: 700;
-  	font-style: normal;
-  	position: fixed;
-  	margin-top: 70px;
+	font-optical-sizing: auto;
+	font-weight: 700;
+	font-style: normal;
+	margin-right: auto;
 }
-.setting_button {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: relative;
-	right: 20px;
-	padding: 5px 10px;
-	width: 90px;
-	height: 50px;
-	font-size: 14px;
-  	font-weight: 500;
-    padding: 10px 20px;
- 	border: none;
- 	border-radius: 6px;
- 	background-color: hsl(0,0%,10%);
- 	color: white;
- 	cursor: pointer;
-  	transition: background-color 0.2s ease;
- 	font-family: "Playfair Display", serif;
- 	font-optical-sizing: auto;
-  	font-weight: 700;
-  	font-style: normal;
 
-}
-.setting_button:hover {
-  background-color: #393E46; /* slight lighter on hover */
-}
-.setting_button:hover {
-  background-color: #393E46;
-  color: white;
-}
-.infodiv {
-	display: flex;
-	justify-content: flex-end;
-	gap: 10px;
-	width: 1550px;
-	height: 50px;
-	position: fixed;
-}
+.setting_button,
 .profile_button {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	position: relative;
-	right: 20px;
-	padding: 5px 10px;
+	padding: 10px 20px;
 	width: 90px;
 	height: 50px;
 	font-size: 14px;
-  	font-weight: 500;
-    padding: 10px 20px;
- 	border: none;
- 	border-radius: 6px;
- 	background-color: hsl(0,0%,10%);
- 	color: white;
- 	cursor: pointer;
-  	transition: background-color 0.2s ease;
- 	font-family: "Playfair Display", serif;
- 	font-optical-sizing: auto;
-  	font-weight: 700;
-  	font-style: normal;
+	font-weight: 500;
+	border: none;
+	border-radius: 6px;
+	background-color: hsl(0, 0%, 10%);
+	color: white;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+	font-family: "Playfair Display", serif;
+	font-optical-sizing: auto;
+	font-weight: 700;
+	font-style: normal;
+}
 
-}
+.setting_button:hover,
 .profile_button:hover {
-  background-color: #393E46; /* slight lighter on hover */
+	background-color: #393E46;
+	color: white;
 }
-.profile_button:hover {
-  background-color: #393E46;
-  color: white;
+
+.chatinput {
+	position: fixed;
+	bottom: 20px;
+	right: 30px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 70%;
+	background-color: hsl(0, 0%, 10%);
+	border-radius: 10px;
+	padding: 10px 15px;
+	box-sizing: border-box;
+}
+
+.messageinput {
+	flex: 1;
+	padding: 10px;
+	background-color: hsl(0, 0%, 20%);
+	color: white;
+	border: none;
+	border-radius: 5px;
+	margin-right: 10px;
+	font-family: "Playfair Display", serif;
+}
+
+.sendbutton {
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	background-color: hsl(0, 0%, 20%);
+	color: white;
+	cursor: pointer;
+	font-family: "Playfair Display", serif;
+	transition: background-color 0.2s ease;
+}
+
+.sendbutton:hover {
+	background-color: #393E46;
 }
