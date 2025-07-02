@@ -17,32 +17,13 @@ body {
 	height: 300px;
 	border-radius: 15px;
 }
-.div-three {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin: 0;
-	margin-top: 5px;
-}
-.div-four {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin: 0;
-	margin-top: 20px;
-}
+
 .sign_up {
   font-family: "Playfair Display", serif;
   font-optical-sizing: auto;
   font-weight: 700;
   font-style: normal;
   color: hsl(0, 0%, 95% );
-}
-.emailinput {
-
-}
-.passwordinput {
-
 }
 .submit_button {
   font-size: 14px;
@@ -58,6 +39,7 @@ body {
   font-optical-sizing: auto;
   font-weight: 700;
   font-style: normal;
+  margin-top: 15px;
 }
 .submit_button:hover {
   background-color: #393E46; /* slight lighter on hover */
@@ -65,4 +47,10 @@ body {
 .submit_button:hover {
   background-color: #393E46;
   color: white;
+}
+.div-three {
+	margin-top: 3px;
+}
+.div-four {
+	margin-top: 3px;
 }
