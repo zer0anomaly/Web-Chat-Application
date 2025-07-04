@@ -64,3 +64,12 @@ body {
   background-color: #393E46;
   color: white;
 }
+.result {
+	font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  color: hsl(0, 0%, 95% );
+  color: red;
+
+}
