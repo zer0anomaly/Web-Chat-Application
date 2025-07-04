@@ -1,8 +1,9 @@
 let submit = document.getElementById('submit_button');
 
-submit.addEventListener('click', () => {
+submit.addEventListener('click', (event) => {
 	event.preventDefault();
-	let email = document.getElementById('email_input').value;
+
+	let email = document.getElementById('email_input').value.trim();
 	let password = document.getElementById('password_input').value;
 
 	fetch('http://localhost:3000/api/login', {
@@ -10,7 +11,7 @@ submit.addEventListener('click', () => {
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify({username, password})
+		body: JSON.stringify({email, password})
 	})
 	.then(response => response.json())
 	.then(data => {
