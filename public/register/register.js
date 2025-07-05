@@ -1,38 +1,48 @@
-let submit = document.getElementById('submit_button');
+document.addEventListener("DOMContentLoaded", () => {
+  const submit = document.getElementById('submit_button');
+  const result = document.getElementById('result');
 
-submit.addEventListener('click', () => {
+  submit.addEventListener('click', () => {
+    const email = document.getElementById('email_input').value.trim();
+    const password = document.getElementById('password_input').value;
+    const confirm = document.getElementById('password_confirmation_input').value;
 
-	let email = document.getElementById('email_input').value.trim();
-	let password = document.getElementById('password_password_input').value;
-	let password_confirm = document.getElementById('password_confirmation_input').value
+    if (!email || !password || !confirm) {
+      result.textContent = "Please fill out all fields.";
+      return;
+    }
 
-	if(!email || !password || !password_confirm){
-		document.getElementById('result').textContent = "Please fill out all fields.";
-		return
-	}
+    if (password !== confirm) {
+      result.textContent = "Passwords do not match.";
+      return;
+    }
 
-	if (password === password_confirm){
-		fetch('http://127.0.0.1:3000', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({email, password})
-		})
-		.then(response => response.json())
-		.then(data => {
-			if(data.message === 'Registration Successful'){
-				window.location.href = '../login/login.html'
-			}else{
-				document.getElementById('result').textContent = "Registration Failed, " + data.message
-			}
-		})
-		.catch(error => {
-			console.error('Error:', error);
-			document.getElementById('result').textContent = 'Server error'
-		});
-	}else {
-		document.getElementById('result').textContent = "Passwords do not match."
-	}
+    fetch('http://127.0.0.1:3000/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
+    })
+    .then(async response => {
+      const contentType = response.headers.get("Content-Type") || "";
+      const raw = await response.text();
 
-})
+      if (!contentType.includes("application/json")) {
+        throw new Error("Expected JSON, got: " + contentType + "\n" + raw);
+      }
+
+      const data = JSON.parse(raw);
+
+      if (data.message.toLowerCase().includes('success')) {
+        window.location.href = "../login/login.html";
+      } else {
+        result.textContent = "Registration Failed: " + (data.message || "Unknown error");
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      result.textContent = "Error: " + err.message;
+    });
+  });
+});

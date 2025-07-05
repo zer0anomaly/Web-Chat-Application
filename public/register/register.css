@@ -54,3 +54,11 @@ body {
 .div-four {
 	margin-top: 3px;
 }
+.result{
+	color: red;
+	ont-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  padding: 10px;
+}
