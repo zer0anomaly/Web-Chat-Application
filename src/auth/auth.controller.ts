@@ -6,10 +6,11 @@ import { CreateUserDto } from './dto/create-user.dto';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post('register')
-  register(@Body() createUserDto: CreateUserDto): string {
-    return this.authService.register(createUserDto);
-  }
+ @Post('register')
+  register(@Body() createUserDto: CreateUserDto): { message: string } {
+  const result = this.authService.register(createUserDto);
+  return { message: result };
+}
 
   @Get('users')
   getUsers() {
