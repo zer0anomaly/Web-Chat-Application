@@ -1,3 +1,4 @@
+// src/auth/auth.controller.ts
 import { Controller, Post, Body, Get } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -7,15 +8,16 @@ import { LoginDto } from './dto/login.dto';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
- @Post('register')
-  register(@Body() createUserDto: CreateUserDto): { message: string } {
-  const result = this.authService.register(createUserDto);
-  return { message: result };
-}
- @Post('login')
-  login(@Body() dto: LoginDto){
-    const result = this.authService.login(dto);
-    return {message: result}
+  @Post('register')
+  register(@Body() createUserDto: CreateUserDto) {
+    const token = this.authService.register(createUserDto);
+    return { token }; // ✅ properly labeled
+  }
+
+  @Post('login')
+  login(@Body() dto: LoginDto) {
+    const token = this.authService.login(dto);
+    return { token }; // ✅ same fix here
   }
 
   @Get('users')

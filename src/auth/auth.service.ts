@@ -1,4 +1,6 @@
+// src/auth/auth.service.ts ✅ Clean Version
 import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from './dto/create-user.dto';
 import { LoginDto } from './dto/login.dto';
 
@@ -11,23 +13,36 @@ export interface User {
 export class AuthService {
   private users: User[] = [];
 
-  register(dto: CreateUserDto): string {
-    const exists = this.users.find(user => user.email === dto.email);
-    if (exists) return 'Email already exists';
+  constructor(private jwtService: JwtService) {}
 
-    this.users.push({ email: dto.email, password: dto.password });
-    return 'Registration Successful';
+  register(createUserDto: CreateUserDto): string {
+    const { email, password } = createUserDto;
+    const userExists = this.users.find(user => user.email === email);
+
+    if (userExists) {
+      throw new Error('User already exists');
+    }
+
+    this.users.push({ email, password });
+
+    const payload = { email };
+    return this.jwtService.sign(payload); // ✅ return JWT
   }
 
   login(dto: LoginDto): string {
-    const user = this.users.find(user => user.email === dto.email);
-    if (!user) return 'User not found';
-    if (user.password !== dto.password) return 'Invalid password';
+    const user = this.users.find(
+      u => u.email === dto.email && u.password === dto.password
+    );
 
-    return 'Login successful';
+    if (!user) {
+      throw new Error('Invalid email or password');
+    }
+
+    const payload = { email: user.email };
+    return this.jwtService.sign(payload); // ✅ return JWT
   }
 
-  getAllUsers(): User[] {
+  getAllUsers() {
     return this.users;
   }
 }

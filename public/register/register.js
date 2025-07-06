@@ -7,16 +7,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const password = document.getElementById('password_input').value;
     const confirm = document.getElementById('password_confirmation_input').value;
 
+    // Input validation
     if (!email || !password || !confirm) {
-      result.textContent = "Please fill out all fields.";
+      result.textContent = "❗ Please fill out all fields.";
       return;
     }
 
     if (password !== confirm) {
-      result.textContent = "Passwords do not match.";
+      result.textContent = "❗ Passwords do not match.";
       return;
     }
 
+    // Send registration request
     fetch('http://127.0.0.1:3000/auth/register', {
       method: 'POST',
       headers: {
@@ -34,15 +36,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const data = JSON.parse(raw);
 
-      if (data.message.toLowerCase().includes('success')) {
+      if (data.token) {
+        // ✅ Save the token
+        localStorage.setItem('token', data.token);
+
+        // ✅ Redirect to login page or dashboard
         window.location.href = "../login/login.html";
       } else {
-        result.textContent = "Registration Failed: " + (data.message || "Unknown error");
+        result.textContent = "❌ Registration failed: " + (data.message || "Unknown error");
       }
     })
     .catch(err => {
       console.error(err);
-      result.textContent = "Error: " + err.message;
+      result.textContent = "❌ Error: " + err.message;
     });
   });
 });

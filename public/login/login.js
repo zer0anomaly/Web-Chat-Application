@@ -37,7 +37,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const data = JSON.parse(raw);
 
-        if (data.message === "Login successful") {
+        if (data.token) {
+          // ✅ Save token to localStorage
+          localStorage.setItem("token", data.token);
+
+          // ✅ Redirect to main app
           window.location.href = "/main/main.html";
         } else {
           result.textContent =
