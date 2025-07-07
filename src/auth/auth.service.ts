@@ -1,4 +1,3 @@
-// src/auth/auth.service.ts ✅ Clean Version
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -11,7 +10,7 @@ export interface User {
 
 @Injectable()
 export class AuthService {
-  private users: User[] = [];
+  public users: User[] = [];
 
   constructor(private jwtService: JwtService) {}
 
@@ -26,7 +25,7 @@ export class AuthService {
     this.users.push({ email, password });
 
     const payload = { email };
-    return this.jwtService.sign(payload); // ✅ return JWT
+    return this.jwtService.sign(payload); 
   }
 
   login(dto: LoginDto): string {
@@ -42,11 +41,12 @@ export class AuthService {
     return this.jwtService.sign(payload); // ✅ return JWT
   }
 
+
   getAllUsers() {
     return this.users;
   }
   decodeToken(token: string): any {
-  return this.jwtService.verify(token); // verify & decode
+  return this.jwtService.verify(token); 
 }
 
 }
