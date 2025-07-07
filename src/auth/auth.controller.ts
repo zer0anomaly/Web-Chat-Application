@@ -3,6 +3,7 @@ import { Controller, Post, Body, Get } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { LoginDto } from './dto/login.dto';
+import { Headers } from '@nestjs/common';
 
 @Controller('auth')
 export class AuthController {
@@ -24,4 +25,11 @@ export class AuthController {
   getUsers() {
     return this.authService.getAllUsers();
   }
+
+  @Get('me')
+  getMyInfo(@Headers('Authorization') authHeader: string) {
+    const token = authHeader.replace('Bearer ', '');
+    const decoded = this.authService.decodeToken(token);
+    return { email: decoded.email };
+}
 }

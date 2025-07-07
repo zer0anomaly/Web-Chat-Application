@@ -45,4 +45,8 @@ export class AuthService {
   getAllUsers() {
     return this.users;
   }
+  decodeToken(token: string): any {
+  return this.jwtService.verify(token); // verify & decode
+}
+
 }
