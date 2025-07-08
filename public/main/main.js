@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {  
+document.addEventListener("DOMContentLoaded", () => {
   const profileBtn = document.getElementById("profile_button");
   const backBtn = document.getElementById("back_button");
   const profileView = document.getElementById("profile_view");
@@ -13,17 +13,40 @@ document.addEventListener("DOMContentLoaded", () => {
   const logout = document.getElementById('logout');
   const delete_account = document.getElementById('delete_account');
 
+  delete_account.addEventListener("click", async () => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = await fetch("http://localhost:3000/users/delete", {
+        method: "DELETE",
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+          body: JSON.stringify({ email: userEmail.textContent })
+      });
+
+      if (response.ok) {
+        localStorage.removeItem("token");
+        window.location.href = "http://localhost:3000";
+      } else {
+        const errorData = await response.json();
+        alert("Error deleting account: " + (errorData.message || "Unknown error"));
+      }
+    } catch (err) {
+      alert("Request failed: " + err.message);
+    }
+  });
+
   profile_overlay_set.style.display = "none";
 
   settingbtn.addEventListener("click", () => {
-    const token = localStorage.getItem("token")
     profile_overlay_set.style.display = "flex";
-  })
+  });
 
   backbtn.addEventListener("click", () => {
     profile_overlay_set.style.display = "none";
   });
-
 
   profileBtn.addEventListener("click", () => {
     const token = localStorage.getItem("token");
