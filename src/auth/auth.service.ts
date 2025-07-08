@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, ConflictException, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from './dto/create-user.dto';
 import { LoginDto } from './dto/login.dto';
@@ -19,7 +19,7 @@ export class AuthService {
     const userExists = this.users.find(user => user.email === email);
 
     if (userExists) {
-      throw new Error('User already exists');
+      throw new ConflictException('User already exists');
     }
 
     this.users.push({ email, password });
@@ -34,19 +34,18 @@ export class AuthService {
     );
 
     if (!user) {
-      throw new Error('Invalid email or password');
+      throw new UnauthorizedException('Invalid email or password');
     }
 
     const payload = { email: user.email };
-    return this.jwtService.sign(payload); // ✅ return JWT
+    return this.jwtService.sign(payload);
   }
-
 
   getAllUsers() {
     return this.users;
   }
-  decodeToken(token: string): any {
-  return this.jwtService.verify(token); 
-}
 
+  decodeToken(token: string): any {
+    return this.jwtService.verify(token); 
+  }
 }

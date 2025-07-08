@@ -4,40 +4,77 @@ document.addEventListener("DOMContentLoaded", () => {
   const profileView = document.getElementById("profile_view");
   const userEmail = document.getElementById("user_email");
 
-  const settingbtn = document.getElementById('setting_button');
-  const backbtn = document.getElementById('back_button_set');
-  const profile_overlay_set = document.getElementById('profile_overlay_set');
-  const settingDiv = document.getElementById('setting_div');
-  const change_pass = document.getElementById('change_the_password');
-  const change_language = document.getElementById('change_the_language');
-  const logout = document.getElementById('logout');
-  const delete_account = document.getElementById('delete_account');
+  const settingbtn = document.getElementById("setting_button");
+  const backbtn = document.getElementById("back_button_set");
+  const profile_overlay_set = document.getElementById("profile_overlay_set");
+  const settingDiv = document.getElementById("setting_div");
+  const change_pass = document.getElementById("change_the_password");
+  const change_language = document.getElementById("change_the_language");
+  const logout = document.getElementById("logout");
+  const delete_account = document.getElementById("delete_account");
+
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    fetch("http://localhost:3000/auth/me", {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.email) {
+          userEmail.textContent = data.email;
+        } else {
+          alert("Failed to fetch user info");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("Error fetching user info");
+      });
+  }
+
+  logout.addEventListener("click", () => {
+    window.location.href = "http://localhost:3000";
+  })
+
 
   delete_account.addEventListener("click", async () => {
     const token = localStorage.getItem("token");
+    const email = userEmail.textContent?.trim();
+
+    if (!email) {
+      alert("Email is missing. Please log in or open your profile first.");
+      return;
+    }
 
     try {
-      const response = await fetch("http://localhost:3000/users/delete", {
-        method: "DELETE",
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-          body: JSON.stringify({ email: userEmail.textContent })
-      });
+      const response = await fetch(
+        `http://localhost:3000/users/delete?email=${encodeURIComponent(email)}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.ok) {
         localStorage.removeItem("token");
         window.location.href = "http://localhost:3000";
       } else {
         const errorData = await response.json();
-        alert("Error deleting account: " + (errorData.message || "Unknown error"));
+        alert(
+          "Error deleting account: " + (errorData.message || "Unknown error")
+        );
       }
     } catch (err) {
       alert("Request failed: " + err.message);
     }
   });
 
+  // ✅ UI logic
   profile_overlay_set.style.display = "none";
 
   settingbtn.addEventListener("click", () => {
@@ -49,31 +86,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   profileBtn.addEventListener("click", () => {
-    const token = localStorage.getItem("token");
-
     if (!token) {
       alert("Not logged in");
       return;
     }
 
-    fetch("http://localhost:3000/auth/me", {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.email) {
-          userEmail.textContent = data.email;
-          document.getElementById("profile_overlay").style.display = "flex";
-        } else {
-          alert("Failed to fetch user info");
-        }
-      })
-      .catch(err => {
-        console.error(err);
-        alert("Error fetching user info");
-      });
+    document.getElementById("profile_overlay").style.display = "flex";
   });
 
   backBtn.addEventListener("click", () => {

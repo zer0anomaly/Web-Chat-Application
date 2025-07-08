@@ -1,12 +1,12 @@
-import { Controller, Delete, Req, Body } from '@nestjs/common';
+import { Controller, Delete, Query } from '@nestjs/common';
 import { UserService } from './user.service';
 
-@Controller('users') // route will be /users/delete
+@Controller('users') // This makes the route /users/delete
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Delete('delete')
-  deleteAccount(@Body() body: { email: string }) {
-    return this.userService.deleteAccount(body.email);
+  deleteAccount(@Query('email') email: string) {
+    return this.userService.deleteAccount(email);
   }
 }
