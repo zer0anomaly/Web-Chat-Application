@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const logout = document.getElementById("logout");
   const delete_account = document.getElementById("delete_account");
   const token = localStorage.getItem("token");
+  const submit_add_button = document.getElementById("submit_add_button")
 
   if (token) {
     fetch("http://localhost:3000/auth/me", {
@@ -107,4 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
   backBtn.addEventListener("click", () => {
     document.getElementById("profile_overlay").style.display = "none";
   });
+
+
+
 });
