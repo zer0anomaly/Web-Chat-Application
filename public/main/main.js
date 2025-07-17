@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const profileView = document.getElementById("profile_view");
   const userEmail = document.getElementById("user_email");
 
+  const backbtnadd = document.getElementById("back_button_add")
+  const add_usr_btn = document.getElementById('add-user')
   const settingbtn = document.getElementById("setting_button");
   const backbtn = document.getElementById("back_button_set");
   const profile_overlay_set = document.getElementById("profile_overlay_set");
@@ -12,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const change_language = document.getElementById("change_the_language");
   const logout = document.getElementById("logout");
   const delete_account = document.getElementById("delete_account");
-
   const token = localStorage.getItem("token");
 
   if (token) {
@@ -76,6 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ✅ UI logic
   profile_overlay_set.style.display = "none";
+  profile_overlay_add.style.display = "none"
 
   settingbtn.addEventListener("click", () => {
     profile_overlay_set.style.display = "flex";
@@ -83,6 +85,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   backbtn.addEventListener("click", () => {
     profile_overlay_set.style.display = "none";
+  });
+
+  add_usr_btn.addEventListener("click", () => {
+    profile_overlay_add.style.display = "flex"
+  })
+
+  backbtnadd.addEventListener("click", () => {
+    profile_overlay_add.style.display = "none";
   });
 
   profileBtn.addEventListener("click", () => {

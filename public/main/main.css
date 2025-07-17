@@ -71,7 +71,74 @@ body {
 	font-weight: 700;
 	margin-right: auto;
 }
-.add-user,
+.add-user {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px 20px;
+	width: 100px;
+	height: 50px;
+	font-size: 14px;
+	font-weight: 500;
+	border: none;
+	border-radius: 6px;
+	background-color: hsl(0, 0%, 10%);
+	color: white;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+	font-family: "Playfair Display", serif;
+	font-weight: 700;
+}
+#profile_overlay_add {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* dark transparent background */
+  display: none; /* hidden by default */
+  align-items: center;
+  justify-content: center;
+  z-index: 999; /* appear above everything */
+}
+#adding_div {
+  background: white;
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+#back_button_add {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px 20px;
+	width: 40px;
+	height: 30px;
+	font-size: 14px;
+	font-weight: 500;
+	border: none;
+	border-radius: 6px;
+	background-color: hsl(0, 0%, 10%);
+	color: white;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+	font-family: "Playfair Display", serif;
+	font-weight: 700;
+	border-radius: 100px;
+}
+#back_button_add_div {
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+}
 .setting_button,
 .profile_button {
 	display: flex;
@@ -91,7 +158,7 @@ body {
 	font-family: "Playfair Display", serif;
 	font-weight: 700;
 }
-.add-user:hover,
+
 .setting_button:hover,
 .profile_button:hover {
 	background-color: #393E46;
