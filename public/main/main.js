@@ -126,8 +126,14 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify({
           data: add_input
         })
+        .then( response => response.json())
+        .then(data => {
+          if (data.result && data.result.includes("success")){
+            
+          }
+        })
     })
   }else {
-    alert("Please fill out the field.")
+    response_back.textContent = "Please fill out the field."
   }
 });
