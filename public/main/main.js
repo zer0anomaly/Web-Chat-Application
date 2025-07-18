@@ -110,5 +110,24 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
+  const submit_add_button = document.getElementById("submit_add_button");
+  const response_back = document.getElementById("response_back")
 
+  submit_add_button.addEventListener("click", () => {
+
+    if(add_input){
+      const add_input = document.getElementById("add_input").value.trim();
+
+      fetch('http://localhost:3000/chat_creation', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          data: add_input
+        })
+    })
+  }else {
+    alert("Please fill out the field.")
+  }
 });
