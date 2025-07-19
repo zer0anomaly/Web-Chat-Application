@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const logout = document.getElementById("logout");
   const delete_account = document.getElementById("delete_account");
   const token = localStorage.getItem("token");
-  const submit_add_button = document.getElementById("submit_add_button")
 
   if (token) {
     fetch("http://localhost:3000/auth/me", {
@@ -115,8 +114,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   submit_add_button.addEventListener("click", () => {
 
+    const add_input = document.getElementById("add_input").value.trim();
+
     if(add_input){
-      const add_input = document.getElementById("add_input").value.trim();
 
       fetch('http://localhost:3000/chat_creation', {
         method: "POST",
@@ -126,14 +126,15 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify({
           data: add_input
         })
+      })
         .then( response => response.json())
         .then(data => {
           if (data.result && data.result.includes("success")){
             
           }
         })
-    })
-  }else {
+  }else { 
     response_back.textContent = "Please fill out the field."
   }
+});
 });
