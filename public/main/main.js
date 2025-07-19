@@ -15,6 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const logout = document.getElementById("logout");
   const delete_account = document.getElementById("delete_account");
   const token = localStorage.getItem("token");
+  const place_for_added_users = document.getElementById("place_for_added_users")
+
+  let email_of_the_user
 
   if (token) {
     fetch("http://localhost:3000/auth/me", {
@@ -25,7 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.email) {
-          userEmail.textContent = data.email;
+          email_of_the_user = data.email
+          userEmail.textContent = email_of_the_user;
         } else {
           alert("Failed to fetch user info");
         }
@@ -124,13 +128,22 @@ document.addEventListener("DOMContentLoaded", () => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          data: add_input
+          data_one: email_of_the_user,
+          data_two: add_input
         })
       })
         .then( response => response.json())
         .then(data => {
           if (data.result && data.result.includes("success")){
-            
+            const chat_btn = document.createElement("button");
+            chat_btn.textContent = add_input;
+            chat_btn.id = "chat_btn_id";
+            chat_btn.className = "chat_btn_id"
+            place_for_added_users.appendChild(chat_btn)
+          }else if (data.result.includes("chat already exists")){
+            response_back.textContent = "Chat already exists"
+          }else{
+            response_back.textContent = "Error."
           }
         })
   }else { 
