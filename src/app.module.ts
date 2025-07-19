@@ -4,7 +4,6 @@ import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller'; // ✅ Add this
 import { UserModule } from './user/user.module';
-import { ChatModule } from './chat/chat.module';
 import { ChatCreationModule } from './chat_creation/chat_creation.module';
 
 @Module({
@@ -14,7 +13,6 @@ import { ChatCreationModule } from './chat_creation/chat_creation.module';
     }),
     AuthModule,
     UserModule,
-    ChatModule,
     ChatCreationModule,
   ],
   controllers: [AppController], // ✅ Add this line
