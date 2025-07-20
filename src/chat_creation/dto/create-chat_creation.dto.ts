@@ -4,11 +4,11 @@ export class CreateChatCreationDto {
 	@IsString()
 	@IsNotEmpty()
 	@IsEmail()
-	user1: string;
+	data_one: string;
 
 
 	@IsString()
 	@IsNotEmpty()
 	@IsEmail()
-	user2: string;
+	data_two: string;
 }
