@@ -1,26 +1,39 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable } '@nestjs/common';
+import * as fs from 'fs';
+import * as path from 'path';
 import { CreateChatCreationDto } from './dto/create-chat_creation.dto';
-import { UpdateChatCreationDto } from './dto/update-chat_creation.dto';
 
-@Injectable()
-export class ChatCreationService {
-  create(createChatCreationDto: CreateChatCreationDto) {
-    return 'This action adds a new chatCreation';
+@Injectable
+export class ChatService {
+  private readonly chatLogsDir = path.join(__dirname, '..', 'chat_logs');
+
+  constructor() {
+    if (!fs.existsSync(this.chatLogsDir)){
+      fs.mkdirSync(this.chatLogsDir);
+    }
   }
+  async createChat(createChatDto: CreateChatCreationDto): Promise<string> {
+    const {user1, user2 } = createChatDto;
 
-  findAll() {
-    return `This action returns all chatCreation`;
-  }
+    const username1 = user1.split('@')[0];
+    const username2 = user2.split('@')[0];
 
-  findOne(id: number) {
-    return `This action returns a #${id} chatCreation`;
-  }
+    const sortedNames = [username1, username2].sort();
+    const chatFileName = `${sortedNames[0]}_${sortedNames[1]}_chat.json`;
+    const chatFilePath = path.join(this.chatLogsDir, chatFileName);
 
-  update(id: number, updateChatCreationDto: UpdateChatCreationDto) {
-    return `This action updates a #${id} chatCreation`;
-  }
+    if(fs.existsSync(chatFilePath)){
+      return `Chat already exists.`
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} chatCreation`;
+    const initialChatLog = {
+      participants: sortedNames,
+      messages: [],
+      createdAt: new Date().toISOString(),
+    };
+
+    fs.writeFileSync(chatFilePath, JSON.stringify(initialChatLog, null, 2))
+    return `Chat created successfully.`
+
   }
 }
