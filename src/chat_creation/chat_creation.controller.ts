@@ -1,13 +1,36 @@
-import { Controller, Post, Body, Get, Req } from '@nestjs/common';
-import { Request } from 'express';
-import { ChatService } from './chat_creation.service'
-import { Chat_creation_Dto } from './dto/create-chat_creation'
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Param
+} from '@nestjs/common';
+import { ChatCreationService } from './chat_creation.service';
+import { CreateChatCreationDto } from './dto/create-chat_creation.dto';
+import * as fs from 'fs';
+import * as path from 'path';
 
-@Controller('chat_creation')
-export class chat_creation_controller {
-  constructor(private readonly ChatService: ChatService) {}
-  
+@Controller('messages')
+export class ChatCreationController {
+  constructor(private readonly chatCreationService: ChatCreationService) {}
+
   @Post()
-  chat_creation(@Body() chat_creation_Dto: Chat_creation_Dto){}
-  return this.
+  async create(@Body() messageData: CreateChatCreationDto) {
+    return await this.chatCreationService.createChat(messageData);
+  }
+
+  @Get('user-chats/:user')
+  getUserChats(@Param('user') user: string): string[] {
+    const chat_logs = path.join(__dirname, '..', 'chat_logs'); // adjust this to match your structure
+
+    const chatFiles = fs.readdirSync(chat_logs); // read files like "one_two_chat.json"
+    const userChats = chatFiles
+      .filter(
+        (name) =>
+          name.includes(user) && name.endsWith('_chat.json')
+      )
+      .map((name) => name.replace('.json', ''));
+
+    return userChats;
+  }
 }

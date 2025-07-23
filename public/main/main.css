@@ -161,7 +161,7 @@ body {
 	font-family: "Playfair Display", serif;
 	font-weight: 700;
 }
-
+.add-user:hover,
 .setting_button:hover,
 .profile_button:hover {
 	background-color: #393E46;
@@ -343,4 +343,20 @@ body {
   overflow-y: auto;
   padding: 20px;
 	border-radius: 20px;
+}
+.chat_btn_id {
+	width: 290px;
+	height: 50px;
+	background-color: hsl(0, 0%, 15%);
+	color: white;
+	border: none;
+	border-radius: 5px;
+	font-family: "Playfair Display", serif;
+	font-weight: 700;
+	border-radius: 10px;
+	font-size: 15px;
+}
+.chat_btn_id:hover {
+	background-color: #393E46;
+	color: white;
 }
