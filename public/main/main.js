@@ -138,6 +138,30 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("profile_overlay").style.display = "none";
   });
 
+  const container = document.querySelector('.place_for_added_users');
+
+// Load buttons from localStorage
+const saved = JSON.parse(localStorage.getItem('addedUsers')) || [];
+saved.forEach(name => {
+  const btn = document.createElement('button');
+  btn.className = 'chat_btn_id';
+  btn.textContent = name;
+  container.appendChild(btn);
+});
+
+// Add a new button
+function addUser(name) {
+  const btn = document.createElement('button');
+  btn.className = 'chat_btn_id';
+  btn.textContent = name;
+  container.appendChild(btn);
+
+  // Save to localStorage
+  saved.push(name);
+  localStorage.setItem('addedUsers', JSON.stringify(saved));
+}
+
+  
   const submit_add_button = document.getElementById("submit_add_button");
   const response_back = document.getElementById("response_back");
 
